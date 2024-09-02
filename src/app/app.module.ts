@@ -11,18 +11,35 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { AntDesingModule } from './shared/ant-design.module';
+import { IndexPageComponent } from './content/index-page/index-page.component';
+import { MedicalComponent } from './content/medical/medical.component';
+import { ReadingComponent } from './content/reading/reading.component';
+import { ExerciseComponent } from './content/exercise/exercise.component';
+import { LoginComponent } from './content/login/login.component';
+import { AngularComponent } from './content/angular/angular.component';
+import { AssetComponent } from './content/asset/asset.component';
+
 registerLocaleData(zh);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    IndexPageComponent,
+    MedicalComponent,
+    ReadingComponent,
+    ExerciseComponent,
+    LoginComponent,
+    AngularComponent,
+    AssetComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AntDesingModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_TW }
