@@ -1,22 +1,23 @@
 import { NgModule } from '@angular/core';
 
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
-
+import { NzGridModule } from 'ng-zorro-antd/grid';
 @NgModule({
-    declarations: [
+  declarations: [
 
-    ],
-    imports: [
-        NzLayoutModule,
+  ],
+  imports: [
+    NzLayoutModule,
+    NzGridModule
+  ],
+  providers: [
 
-    ],
-    providers: [
-
-    ],
-    exports: [
-        NzLayoutModule
-    ],
-    bootstrap: []
+  ],
+  exports: [
+    NzLayoutModule,
+    NzGridModule
+  ],
+  bootstrap: []
 })
 
 export class AntDesingModule { }

@@ -1,0 +1,23 @@
+.outer-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100vh; /* Make the outer container fill the viewport height */
+}
+
+.inner-box {
+  display: flex;
+  flex-direction: column; /* Align items in a column */
+  justify-content: center; /* Center items vertically */
+  align-items: center; /* Center items horizontally */
+  height: 30vh; /* Adjust height to fill the viewport, or set it to your desired height */
+  text-align: center; /* Center the text */
+
+  cursor: pointer;
+
+  :hover {
+    img {
+      transform: scale(1.2);
+    }
+  }
+}

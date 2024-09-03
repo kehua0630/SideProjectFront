@@ -1,1 +1,14 @@
-<p>index-page works!</p>
+<div class="outer-container">
+  <div nz-row [nzGutter]="16" nzAlign="middle" nzJustify="space-around">
+    <div nz-col class="gutter-row" [nzSpan]="7" *ngFor="let func of functionList">
+      <div class="inner-box" (click)="onNavigateClick(func.routerPath)">
+        <div>
+          <img [src]="func.imageUrl" [alt]="func.name" height="200">
+        </div>
+        <h1 style="margin-top: 20px;">
+          {{ func.name}}
+        </h1>
+      </div>
+    </div>
+  </div>
+</div>
