@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AntDesingModule } from './shared/ant-design.module';
+import { AntDesingModule } from './shared/module/ant-design.module';
 import { IndexPageComponent } from './content/index-page/index-page.component';
 import { MedicalComponent } from './content/medical/medical.component';
 import { ReadingComponent } from './content/reading/reading.component';

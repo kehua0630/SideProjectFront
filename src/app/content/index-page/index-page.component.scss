@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
-  height: 100vh; /* Make the outer container fill the viewport height */
+  height: 100%; /* Make the outer container fill the viewport height */
 }
 
 .inner-box {

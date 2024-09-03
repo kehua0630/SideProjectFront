@@ -1,13 +1,13 @@
 <div class="outer-container">
-  <div nz-row [nzGutter]="16" nzAlign="middle" nzJustify="space-around">
-    <div nz-col class="gutter-row" [nzSpan]="7" *ngFor="let func of functionList">
+  <div class="grid grid-cols-3 gap-24">
+    <div *ngFor="let func of functionList">
       <div class="inner-box" (click)="onNavigateClick(func.routerPath)">
         <div>
-          <img [src]="func.imageUrl" [alt]="func.name" height="200">
+          <img [src]="func.imageUrl" [alt]="func.name" class="h-48 mt-10">
         </div>
-        <h1 style="margin-top: 20px;">
+        <div class="text-2xl mt-10">
           {{ func.name}}
-        </h1>
+        </div>
       </div>
     </div>
   </div>
