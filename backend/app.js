@@ -49,12 +49,16 @@ app.get("/accounts", (req, res, next) => {
             {
                 userName: 'test1',
                 createTime: '2024/09/05 21:00:00',
-                inUse: 'Y'
+                inUse: 'Y',
+                pwd: 'test123',
+                func: ['account', 'marquee', 'upload-pdf']
             },
             {
                 userName: 'test2',
                 createTime: '2024/09/06 21:00:00',
-                inUse: 'Y'
+                inUse: 'Y',
+                pwd: 'test123',
+                func: ['account', 'marquee', 'upload-pdf']
             }
         ],
     });

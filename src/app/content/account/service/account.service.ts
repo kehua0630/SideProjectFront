@@ -13,7 +13,7 @@ export class AccountService {
     private apiSvc: ApiRequestService
   ) { }
 
-  getAccountList(): Observable<Account> {
+  getAccountList(): Observable<Account[]> {
     const url = API.ACCOUNT;
 
     return this.apiSvc.request(HTTP_METHOD.GET, null, url).pipe(
@@ -29,7 +29,10 @@ export class AccountService {
 
 
 export interface Account {
+  id?: string;
   userName: string;
+  pwd: string;
   createTime: string;
   inUse: 'Y' | 'N';
+  func: string[];
 }

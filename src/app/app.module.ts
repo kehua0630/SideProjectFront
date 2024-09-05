@@ -17,7 +17,9 @@ import { LoginComponent } from './content/login/login.component';
 import { UploadPdfComponent } from './content/upload-pdf/upload-pdf.component';
 import { MarqueeComponent } from './content/marquee/marquee.component';
 import { AccountComponent } from './content/account/account.component';
-
+import { FunctionPipe } from './shared/pipe/function.pipe';
+import { EditModalComponent } from './content/account/edit-modal/edit-modal.component';
+import { BaseModalComponent } from './shared/component/base-modal/base-modal.component';
 
 registerLocaleData(zh);
 
@@ -29,6 +31,9 @@ registerLocaleData(zh);
     UploadPdfComponent,
     MarqueeComponent,
     AccountComponent,
+    FunctionPipe,
+    EditModalComponent,
+    BaseModalComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +46,10 @@ registerLocaleData(zh);
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_TW }
+  ],
+  exports: [
+    FunctionPipe,
+    BaseModalComponent
   ],
   bootstrap: [AppComponent]
 })

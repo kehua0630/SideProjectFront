@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from 'src/app/shared/service/common.service';
-import { AccountService } from './service/account.service';
+import { Account, AccountService } from './service/account.service';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { EditModalComponent } from './edit-modal/edit-modal.component';
 
 @Component({
   selector: 'app-account',
@@ -11,13 +13,16 @@ import { AccountService } from './service/account.service';
 export class AccountComponent implements OnInit {
 
   searchForm: FormGroup = this.fb.group({
-    userName: ['test1', Validators.required]
-  });;
+    userName: ['']
+  });
+
+  listOfData: Account[] = [];
 
   constructor(
     private fb: FormBuilder,
     private commonSvc: CommonService,
-    private accountSvc: AccountService) { }
+    private accountSvc: AccountService,
+    private modalSvc: NzModalService) { }
 
 
   ngOnInit(): void {
@@ -29,15 +34,36 @@ export class AccountComponent implements OnInit {
 
     if (this.searchForm.valid) {
       this.accountSvc.getAccountList().subscribe(res => {
-        console.log(res);
+        this.listOfData = res;
       });
     }
   }
-
 
   onClear() {
     this.searchForm.patchValue({
       userName: ''
     });
   }
+
+  onEdit(type: string, account?: Account) {
+    this.modalSvc.create({
+      nzTitle: '',
+      nzContent: EditModalComponent,
+      nzWidth: '60%',
+      nzMaskClosable: true,
+      nzClosable: false,
+      nzData: {
+        type,
+        account
+      },
+      // nzComponentParams: {
+      //   type,
+      //   account
+      // },
+      nzOnOk: () => {
+
+      }
+    });
+  }
+  onDelete(data: Account) { }
 }

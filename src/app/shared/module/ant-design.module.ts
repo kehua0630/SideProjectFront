@@ -5,6 +5,8 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     NzGridModule,
     NzFormModule,
     NzInputModule,
-    NzButtonModule
+    NzButtonModule,
+    NzTableModule,
+    NzModalModule
   ],
   providers: [
 
@@ -25,7 +29,9 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     NzGridModule,
     NzFormModule,
     NzInputModule,
-    NzButtonModule
+    NzButtonModule,
+    NzTableModule,
+    NzModalModule
   ],
   bootstrap: []
 })

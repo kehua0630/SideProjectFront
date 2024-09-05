@@ -1,6 +1,6 @@
 <div class="w-100 h-full border-solid border-8 border-cyan-800 rounded-lg">
     <div class="base-card">
-        <div class="base-card-header">
+        <div class="base-card-header bg-slate-400">
             <h4>查詢條件</h4>
         </div>
         <div class="base-card-content">
@@ -33,20 +33,46 @@
             <hr />
             <!-- 查詢結果 -->
             <div class="base-card mx-2">
-                <div class="base-card-header">
+                <div class="base-card-header bg-slate-400 flex justify-between">
                     <h4>查詢結果</h4>
+                    <button nz-button (click)="onEdit('add')" nzType="default">新增</button>
                 </div>
-                <!-- <app-custom-table
-              [records]="list"
-              [settings]="projectSettings"
-              [widthConfig]="widthConfig"
-              [pages]="pages"
-              [hasCheckBox]="false"
-              [canHover]="false"
-              (trDoubleClick)="onPositiveClick($event[0], $event[1])"
-              (positive)="onPositiveClick($event[0], $event[1])"
-              (sortClick)="getBySort($event[0], $event[1])"
-            ></app-custom-table> -->
+                <div class="base-card-content">
+                    <nz-table #columnTable [nzData]="listOfData" [nzScroll]="{ x: '1100px' }"
+                        [nzHideOnSinglePage]="true">
+                        <thead>
+                            <tr>
+                                <th>名稱</th>
+                                <th>權限</th>
+                                <th>是否啟用</th>
+                                <th>創建時間</th>
+                                <th nzRight>編輯</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of columnTable.data">
+                                <td>{{ data.userName }}</td>
+                                <td>
+                                    <span *ngFor="let func of data.func; let i as index">{{ func | funcPipe }}{{' '}}
+
+                                    </span>
+
+                                </td>
+                                <td>{{ data.inUse }}</td>
+                                <td>{{ data.createTime }}</td>
+                                <td nzRight>
+                                    <button type="submit" nz-button nzType="primary" class="mx-2"
+                                        (click)="onEdit('edit',data)">
+                                        編輯
+                                    </button>
+                                    <button nz-button nzType="default" (click)="onDelete(data)">
+                                        刪除
+                                    </button>
+                            </tr>
+                        </tbody>
+                    </nz-table>
+                </div>
+
             </div>
         </div>
     </div>

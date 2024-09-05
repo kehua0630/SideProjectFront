@@ -13,6 +13,14 @@ export const enum CRUD {
     DELETE = 'delete',
 }
 
+export const enum MODAL_BUTTON_ACTION {
+    SAVE = '儲存',
+    CLEAR = '清除',
+    CLOSE = '關閉',
+    CONFIRM = '確認'
+}
+
+
 export const enum COMMON {
     /**
      * rename token -> token2,
