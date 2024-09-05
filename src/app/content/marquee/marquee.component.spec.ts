@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AssetComponent } from './asset.component';
+import { MarqueeComponent } from './marquee.component';
 
-describe('AssetComponent', () => {
-  let component: AssetComponent;
-  let fixture: ComponentFixture<AssetComponent>;
+describe('MarqueeComponent', () => {
+  let component: MarqueeComponent;
+  let fixture: ComponentFixture<MarqueeComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AssetComponent]
+      declarations: [MarqueeComponent]
     });
-    fixture = TestBed.createComponent(AssetComponent);
+    fixture = TestBed.createComponent(MarqueeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

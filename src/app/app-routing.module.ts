@@ -1,23 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MedicalComponent } from './content/medical/medical.component';
 import { IndexPageComponent } from './content/index-page/index-page.component';
-import { ExerciseComponent } from './content/exercise/exercise.component';
-import { AssetComponent } from './content/asset/asset.component';
-import { AngularComponent } from './content/angular/angular.component';
-import { ReadingComponent } from './content/reading/reading.component';
 import { LoginComponent } from './content/login/login.component';
 import { AuthGuard } from './auth/auth.guard';
+import { MarqueeComponent } from './content/marquee/marquee.component';
+import { UploadPdfComponent } from './content/upload-pdf/upload-pdf.component';
+import { ROUTING_PATH } from './shared/const/router.const';
+import { AccountComponent } from './content/account/account.component';
 
 const routes: Routes = [
   { path: '', component: IndexPageComponent },
-  { path: 'index-page', component: IndexPageComponent },
-  { path: 'medical-records', component: MedicalComponent, canActivate: [AuthGuard], },
-  { path: 'exercise-note', component: ExerciseComponent, canActivate: [AuthGuard], },
-  { path: 'asset', component: AssetComponent, canActivate: [AuthGuard], },
-  { path: 'angular-note', component: AngularComponent, canActivate: [AuthGuard], },
-  { path: 'reading', component: ReadingComponent, canActivate: [AuthGuard], },
-  { path: 'login', component: LoginComponent },
+  { path: ROUTING_PATH.INDEX, component: IndexPageComponent },
+  { path: ROUTING_PATH.LOGIN, component: LoginComponent },
+  { path: ROUTING_PATH.ACCOUNT, component: AccountComponent, canActivate: [AuthGuard] },
+  { path: ROUTING_PATH.MARQUEE, component: MarqueeComponent, canActivate: [AuthGuard] },
+  { path: ROUTING_PATH.UPLOAD_PDF, component: UploadPdfComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

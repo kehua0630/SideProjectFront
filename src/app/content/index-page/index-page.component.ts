@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ROUTING_PATH } from 'src/app/shared/const/router.const';
 
 @Component({
   selector: 'app-index-page',
@@ -10,34 +11,19 @@ export class IndexPageComponent implements OnInit {
 
   functionList = [
     {
-      name: 'Angular筆記',
-      imageUrl: './assets/function/angular.png',
-      routerPath: 'angular-note'
+      name: '跑馬燈',
+      imageUrl: './assets/function/board.png',
+      routerPath: ROUTING_PATH.MARQUEE
     },
     {
-      name: '運動筆記',
-      imageUrl: './assets/function/basketball.png',
-      routerPath: 'exercise-note'
-    },
-    {
-      name: '閱讀隨手',
-      imageUrl: './assets/function/book.png',
-      routerPath: 'reading'
-    },
-    {
-      name: '醫療紀錄',
-      imageUrl: './assets/function/medical-report.png',
-      routerPath: 'medical-records'
-    },
-    {
-      name: '資產紀錄',
-      imageUrl: './assets/function/asset.png',
-      routerPath: 'asset'
+      name: '上傳PDF',
+      imageUrl: './assets/function/pdf.png',
+      routerPath: ROUTING_PATH.UPLOAD_PDF
     },
     {
       name: '帳戶',
-      imageUrl: './assets/function/login.png',
-      routerPath: 'login'
+      imageUrl: './assets/function/account.png',
+      routerPath: ROUTING_PATH.ACCOUNT
     },
   ];
 

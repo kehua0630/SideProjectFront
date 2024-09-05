@@ -32,20 +32,31 @@ app.use((req, res, next) => {
 });
 
 // post request
-app.post("/api/posts", (req, res, next) => {
-    // TODO save req.body to DB
-    console.log('/api/posts post request', req.body);
+// app.post("/api/posts", (req, res, next) => {
+//     // TODO save req.body to DB
+//     console.log('/api/posts post request', req.body);
 
-    res.status(201).json({
-        message:'post successfully!'
-    });
-})
+//     res.status(201).json({
+//         message:'post successfully!'
+//     });
+// })
 
-app.use("/api/posts", (req, res, next) => {
-    console.log('/api/posts');
-
+app.get("/accounts", (req, res, next) => {
     res.status(200).json({
-        message: 'json data from /api/posts'
+        RetCode: '00',
+        RetMsg: '',
+        RetResult: [
+            {
+                userName: 'test1',
+                createTime: '2024/09/05 21:00:00',
+                inUse: 'Y'
+            },
+            {
+                userName: 'test2',
+                createTime: '2024/09/06 21:00:00',
+                inUse: 'Y'
+            }
+        ],
     });
 });
 

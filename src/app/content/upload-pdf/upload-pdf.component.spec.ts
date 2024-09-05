@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AngularComponent } from './angular.component';
+import { UploadPdfComponent } from './upload-pdf.component';
 
-describe('AngularComponent', () => {
-  let component: AngularComponent;
-  let fixture: ComponentFixture<AngularComponent>;
+describe('UploadPdfComponent', () => {
+  let component: UploadPdfComponent;
+  let fixture: ComponentFixture<UploadPdfComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AngularComponent]
+      declarations: [UploadPdfComponent]
     });
-    fixture = TestBed.createComponent(AngularComponent);
+    fixture = TestBed.createComponent(UploadPdfComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

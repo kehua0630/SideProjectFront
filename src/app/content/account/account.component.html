@@ -1,0 +1,54 @@
+<div class="w-100 h-full border-solid border-8 border-cyan-800 rounded-lg">
+    <div class="base-card">
+        <div class="base-card-header">
+            <h4>查詢條件</h4>
+        </div>
+        <div class="base-card-content">
+            <!-- 條件欄位 -->
+            <form nz-form [nzLayout]="'vertical'" [formGroup]="searchForm" class="ant-advanced-search-form" nzNoColon
+                (ngSubmit)="onSubmit()">
+                <div nz-row [nzGutter]="{ md: 12, xl: 24 }" nzType="flex" nzAlign="bottom">
+                    <div nz-col [nzXl]="4" [nzMd]="8">
+                        <nz-form-item>
+                            <nz-form-label nzFor="period">名稱</nz-form-label>
+                            <nz-form-control nzErrorTip="此欄位為必填欄位">
+                                <input nz-input formControlName="userName" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col [nzXl]="6" [nzMd]="8">
+                        <nz-form-item>
+                            <nz-form-control>
+                                <button type="submit" nz-button nzType="primary" class="mx-2">
+                                    查詢
+                                </button>
+                                <button nz-button nzType="default" (click)="onClear()">
+                                    清除
+                                </button>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                </div>
+            </form>
+            <hr />
+            <!-- 查詢結果 -->
+            <div class="base-card mx-2">
+                <div class="base-card-header">
+                    <h4>查詢結果</h4>
+                </div>
+                <!-- <app-custom-table
+              [records]="list"
+              [settings]="projectSettings"
+              [widthConfig]="widthConfig"
+              [pages]="pages"
+              [hasCheckBox]="false"
+              [canHover]="false"
+              (trDoubleClick)="onPositiveClick($event[0], $event[1])"
+              (positive)="onPositiveClick($event[0], $event[1])"
+              (sortClick)="getBySort($event[0], $event[1])"
+            ></app-custom-table> -->
+            </div>
+        </div>
+    </div>
+
+</div>
