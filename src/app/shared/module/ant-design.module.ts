@@ -7,6 +7,9 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     NzInputModule,
     NzButtonModule,
     NzTableModule,
-    NzModalModule
+    NzModalModule,
+    NzIconModule,
+    NzSwitchModule,
+    NzCheckboxModule
   ],
   providers: [
 
@@ -31,7 +37,10 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     NzInputModule,
     NzButtonModule,
     NzTableModule,
-    NzModalModule
+    NzModalModule,
+    NzIconModule,
+    NzSwitchModule,
+    NzCheckboxModule
   ],
   bootstrap: []
 })

@@ -4,6 +4,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const Account = require('./models/account')
 
 // basic use, show message send on localhost:3000
 // app.use((req, res, next) => {
@@ -41,7 +42,49 @@ app.use((req, res, next) => {
 //     });
 // })
 
+app.post('/accounts', (req, res, next) => {
+    console.log('post accounts')
+    const account = new Account({
+        userName: req.body.userName,
+        pwd: req.body.pwd,
+        inUse: req.body.inUse,
+        func: req.body.func,
+        createTime: req.body.createTime,
+    });
+
+    console.log(account)
+
+    res.status(201).json({
+        RetCode: '00',
+        RetMsg: '新增成功！',
+    });
+})
+
 app.get("/accounts", (req, res, next) => {
+    console.log('get accounts')
+    res.status(200).json({
+        RetCode: '00',
+        RetMsg: '',
+        RetResult: [
+            {
+                userName: 'test1',
+                createTime: '2024/09/05 21:00:00',
+                inUse: 'Y',
+                pwd: 'test123',
+                func: ['account', 'marquee', 'upload-pdf']
+            },
+            {
+                userName: 'test2',
+                createTime: '2024/09/06 21:00:00',
+                inUse: 'Y',
+                pwd: 'test123',
+                func: ['account', 'marquee', 'upload-pdf']
+            }
+        ],
+    });
+});
+
+app.delete("/accounts", (req, res, next) => {
     res.status(200).json({
         RetCode: '00',
         RetMsg: '',

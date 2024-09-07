@@ -33,9 +33,7 @@ export class AccountComponent implements OnInit {
     this.commonSvc.validateAllFormFields(this.searchForm);
 
     if (this.searchForm.valid) {
-      this.accountSvc.getAccountList().subscribe(res => {
-        this.listOfData = res;
-      });
+      this.getAccountList();
     }
   }
 
@@ -61,9 +59,31 @@ export class AccountComponent implements OnInit {
       //   account
       // },
       nzOnOk: () => {
-
+        this.getAccountList();
       }
     });
   }
-  onDelete(data: Account) { }
+
+  onDelete(data: Account) {
+    this.modalSvc.confirm({
+      nzTitle: '刪除',
+      nzContent: '<b style="color: red;">確認是否刪除？</b>',
+      nzOkText: '確認',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => this.deleteAccount(data.id),
+      nzCancelText: '取消',
+      nzOnCancel: () => console.log('Cancel')
+    });
+  }
+
+  getAccountList() {
+    this.accountSvc.getAccountList().subscribe(res => {
+      this.listOfData = res;
+    });
+  }
+
+  deleteAccount(accountId?: string) {
+    this.accountSvc
+  }
 }

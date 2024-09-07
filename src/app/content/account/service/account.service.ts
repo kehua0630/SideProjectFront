@@ -25,6 +25,20 @@ export class AccountService {
       })
     );
   }
+
+  addAccount(account: Account): any {
+    const url = API.ACCOUNT;
+    console.log('post account',account)
+    return this.apiSvc.request(HTTP_METHOD.POST, account, url).pipe(
+      map((res) => {
+        console.log(res);
+        if (RETCODE.SUCCESS !== res.RetCode) {
+          throw res.RetMsg;
+        }
+        return res;
+      })
+    );
+  }
 }
 
 
