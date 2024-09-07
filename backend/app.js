@@ -3,6 +3,8 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
 const app = express();
 const Account = require('./models/account')
 
@@ -17,6 +19,15 @@ const Account = require('./models/account')
 // });
 
 // get json data from localhost:3000/api/posts (GET request)
+
+// conncet to mongoDB
+mongoose.connect('mongodb+srv://chaokehuawork:GPsf75MpfVeNpufb@cluster0.mlowz.mongodb.net/')
+.then(() => {
+    console.log('mongodb connected!')
+ })
+ .catch(() => {
+    console.log('mongodb failed!')
+ })
 
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: false }));
