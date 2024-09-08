@@ -4,6 +4,7 @@ import { CommonService } from 'src/app/shared/service/common.service';
 import { Account, AccountService } from './service/account.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
+import { RETCODE } from 'src/app/shared/const/common.const';
 
 @Component({
   selector: 'app-account',
@@ -84,6 +85,16 @@ export class AccountComponent implements OnInit {
   }
 
   deleteAccount(accountId?: string) {
-    this.accountSvc
+    if (accountId) {
+      this.accountSvc.deleteAccount(accountId).subscribe(res => {
+        console.log(res)
+        if (res.RetCode === RETCODE.SUCCESS) {
+          const modal = this.modalSvc.success({
+            nzTitle: res.RetMsg,
+          });
+          this.getAccountList();
+        }
+      });
+    }
   }
 }

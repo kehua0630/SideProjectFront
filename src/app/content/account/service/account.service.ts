@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HTTP_METHOD, API, RETCODE } from 'src/app/shared/const/common.const';
 import { ApiRequestService } from 'src/app/shared/service/api-request.service';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -21,17 +22,39 @@ export class AccountService {
         if (RETCODE.SUCCESS !== res.RetCode) {
           throw res.RetMsg;
         }
-        return res.RetResult;
+        return res.RetResult.map((account: any) => {
+          return {
+            id: account._id,
+            userName: account.userName,
+            pwd: account.pwd,
+            createTime: account.createTime,
+            inUse: account.inUse,
+            func: account.func
+          }
+        });
       })
     );
   }
 
-  addAccount(account: Account): any {
+  addAccount(account: Account): Observable<any> {
     const url = API.ACCOUNT;
     console.log('post account', account)
     return this.apiSvc.request(HTTP_METHOD.POST, account, url).pipe(
       map((res) => {
         console.log(res);
+        if (RETCODE.SUCCESS !== res.RetCode) {
+          throw res.RetMsg;
+        }
+        return res;
+      })
+    );
+  }
+
+  deleteAccount(accountId: string): Observable<any> {
+    const url = API.ACCOUNT + `/${accountId}`;
+    console.log('delete account', accountId)
+    return this.apiSvc.requestUrl(HTTP_METHOD.DELETE, null, environment.DEFAULT_IP, url).pipe(
+      map((res) => {
         if (RETCODE.SUCCESS !== res.RetCode) {
           throw res.RetMsg;
         }
@@ -47,6 +70,6 @@ export interface Account {
   userName: string;
   pwd: string;
   createTime: string;
-  inUse: 'Y' | 'N';
+  inUse: boolean;
   func: { label: string, value: string, checked: boolean }[];
 }

@@ -76,6 +76,7 @@ app.post('/accounts', (req, res, next) => {
 
 app.get("/accounts", (req, res, next) => {
     console.log('get accounts');
+    // TODO add fiter data
     Account.find()
         .then(documents => {
             console.log(documents);
@@ -87,26 +88,14 @@ app.get("/accounts", (req, res, next) => {
         });
 });
 
-app.delete("/accounts", (req, res, next) => {
-    res.status(200).json({
-        RetCode: '00',
-        RetMsg: '',
-        RetResult: [
-            {
-                userName: 'test1',
-                createTime: '2024/09/05 21:00:00',
-                inUse: 'Y',
-                pwd: 'test123',
-                func: ['account', 'marquee', 'upload-pdf']
-            },
-            {
-                userName: 'test2',
-                createTime: '2024/09/06 21:00:00',
-                inUse: 'Y',
-                pwd: 'test123',
-                func: ['account', 'marquee', 'upload-pdf']
-            }
-        ],
+app.delete("/accounts/:id", (req, res, next) => {
+    console.log('delete req ID::', req.params.id);
+    Account.deleteOne({ _id: req.params.id }).then(result => {
+        console.log(result);
+        res.status(200).json({
+            RetCode: '00',
+            RetMsg: '刪除成功！',
+        });
     });
 });
 

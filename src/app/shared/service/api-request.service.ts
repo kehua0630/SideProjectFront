@@ -102,7 +102,12 @@ export class ApiRequestService {
       return this.http
         .post<any>(ip + url, requestParams, { headers: httpHeaders })
         .pipe(filter(this.handleUserError), catchError(this.handleError));
-    } else {
+    } else if (HTTP_METHOD.DELETE === method) {
+      return this.http
+        .delete<any>(ip + url, { headers: httpHeaders })
+        .pipe(filter(this.handleUserError), catchError(this.handleError));
+    }
+    else {
       return this.http
         .get<any>(ip + url, { headers: httpHeaders })
         .pipe(filter(this.handleUserError), catchError(this.handleError));
