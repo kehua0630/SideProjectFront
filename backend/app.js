@@ -21,13 +21,14 @@ const Account = require('./models/account')
 // get json data from localhost:3000/api/posts (GET request)
 
 // conncet to mongoDB
-mongoose.connect('mongodb+srv://chaokehuawork:GPsf75MpfVeNpufb@cluster0.mlowz.mongodb.net/')
-.then(() => {
-    console.log('mongodb connected!')
- })
- .catch(() => {
-    console.log('mongodb failed!')
- })
+// side-project→ name of DB
+mongoose.connect('mongodb+srv://chaokehuawork:GPsf75MpfVeNpufb@cluster0.mlowz.mongodb.net/side-project?retryWrites=true')
+    .then(() => {
+        console.log('mongodb connected!')
+    })
+    .catch(() => {
+        console.log('mongodb failed!')
+    })
 
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: false }));
@@ -63,7 +64,9 @@ app.post('/accounts', (req, res, next) => {
         createTime: req.body.createTime,
     });
 
-    console.log(account)
+    console.log(account);
+    // save to db as accounts
+    account.save();
 
     res.status(201).json({
         RetCode: '00',
@@ -72,27 +75,16 @@ app.post('/accounts', (req, res, next) => {
 })
 
 app.get("/accounts", (req, res, next) => {
-    console.log('get accounts')
-    res.status(200).json({
-        RetCode: '00',
-        RetMsg: '',
-        RetResult: [
-            {
-                userName: 'test1',
-                createTime: '2024/09/05 21:00:00',
-                inUse: 'Y',
-                pwd: 'test123',
-                func: ['account', 'marquee', 'upload-pdf']
-            },
-            {
-                userName: 'test2',
-                createTime: '2024/09/06 21:00:00',
-                inUse: 'Y',
-                pwd: 'test123',
-                func: ['account', 'marquee', 'upload-pdf']
-            }
-        ],
-    });
+    console.log('get accounts');
+    Account.find()
+        .then(documents => {
+            console.log(documents);
+            res.status(200).json({
+                RetCode: '00',
+                RetMsg: '',
+                RetResult: documents,
+            });
+        });
 });
 
 app.delete("/accounts", (req, res, next) => {

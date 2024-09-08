@@ -53,7 +53,7 @@
                             <tr *ngFor="let data of columnTable.data">
                                 <td>{{ data.userName }}</td>
                                 <td>
-                                    <div *ngFor="let func of data.func; let i as index">{{ func | funcPipe }}{{' '}}
+                                    <div *ngFor="let func of data.func; let i as index">{{ func.value | funcPipe }}{{' '}}
                                     </div>
 
                                 </td>

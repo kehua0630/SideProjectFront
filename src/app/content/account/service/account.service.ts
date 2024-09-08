@@ -28,7 +28,7 @@ export class AccountService {
 
   addAccount(account: Account): any {
     const url = API.ACCOUNT;
-    console.log('post account',account)
+    console.log('post account', account)
     return this.apiSvc.request(HTTP_METHOD.POST, account, url).pipe(
       map((res) => {
         console.log(res);
@@ -48,5 +48,5 @@ export interface Account {
   pwd: string;
   createTime: string;
   inUse: 'Y' | 'N';
-  func: string[];
+  func: { label: string, value: string, checked: boolean }[];
 }

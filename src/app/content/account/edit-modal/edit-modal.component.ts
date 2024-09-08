@@ -47,12 +47,6 @@ export class EditModalComponent implements OnInit {
   ngOnChanges(): void {
     if (this.account) {
       this.accountForm?.patchValue(this.account);
-      this.account.func.forEach(funcValue => {
-        const func = this.funcOptions.find(func => func.value === funcValue);
-        if (func) {
-          func.checked = true;
-        }
-      });
     }
   }
 
