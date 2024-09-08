@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from 'src/app/shared/service/common.service';
 import { Account, AccountService } from './service/account.service';
@@ -23,7 +23,8 @@ export class AccountComponent implements OnInit {
     private fb: FormBuilder,
     private commonSvc: CommonService,
     private accountSvc: AccountService,
-    private modalSvc: NzModalService) { }
+    private modalSvc: NzModalService,
+    private viewContainerRef: ViewContainerRef) { }
 
 
   ngOnInit(): void {
@@ -45,24 +46,21 @@ export class AccountComponent implements OnInit {
   }
 
   onEdit(type: string, account?: Account) {
-    this.modalSvc.create({
+    const modal = this.modalSvc.create<EditModalComponent, { type: string, account?: Account }>({
       nzTitle: '',
       nzContent: EditModalComponent,
+      nzViewContainerRef: this.viewContainerRef,
       nzWidth: '60%',
       nzMaskClosable: true,
       nzClosable: false,
-      nzData: {
-        type,
-        account
-      },
-      // nzComponentParams: {
-      //   type,
-      //   account
-      // },
       nzOnOk: () => {
         this.getAccountList();
       }
     });
+
+    const instance = modal.getContentComponent();
+    instance.type = type;
+    instance.account = account;
   }
 
   onDelete(data: Account) {

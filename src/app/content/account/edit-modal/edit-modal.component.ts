@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Account, AccountService } from '../service/account.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ROUTING_PATH } from 'src/app/shared/const/router.const';
@@ -42,16 +42,10 @@ export class EditModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.accountForm.get('func')?.patchValue(this.funcOptions);
-  }
-
-  ngOnChanges(): void {
+    console.log(this.account)
     if (this.account) {
       this.accountForm?.patchValue(this.account);
     }
-  }
-
-  onFuncChange(func: { label: string, value: string, checked?: boolean }[]) {
-
   }
 
   onConfirm() {

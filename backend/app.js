@@ -66,11 +66,14 @@ app.post('/accounts', (req, res, next) => {
 
     console.log(account);
     // save to db as accounts
-    account.save();
+    account.save().then(newAccount => {
 
-    res.status(201).json({
-        RetCode: '00',
-        RetMsg: '新增成功！',
+        // 傳回新增的ID, 寫回前端, 不用重新摳api, get全部資料
+        res.status(201).json({
+            RetCode: '00',
+            RetMsg: '新增成功！',
+            RetResult: newAccount._id
+        });
     });
 })
 
@@ -90,13 +93,14 @@ app.get("/accounts", (req, res, next) => {
 
 app.delete("/accounts/:id", (req, res, next) => {
     console.log('delete req ID::', req.params.id);
-    Account.deleteOne({ _id: req.params.id }).then(result => {
-        console.log(result);
-        res.status(200).json({
-            RetCode: '00',
-            RetMsg: '刪除成功！',
+    Account.deleteOne({ _id: req.params.id })
+        .then(result => {
+            console.log(result);
+            res.status(200).json({
+                RetCode: '00',
+                RetMsg: `刪除筆數${result.deletedCount}筆！`,
+            });
         });
-    });
 });
 
 
