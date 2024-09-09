@@ -22,7 +22,7 @@ export class EditModalComponent implements OnInit {
     pwd: ['', Validators.required],
     inUse: [false],
     func: [[], Validators.required],
-    createTime: ['', Validators.required]
+    createTime: ['']
   });
 
   passwordVisible = false;
