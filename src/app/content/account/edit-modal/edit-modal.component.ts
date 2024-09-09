@@ -17,6 +17,7 @@ export class EditModalComponent implements OnInit {
   @Input() account?: Account;
 
   accountForm: FormGroup = this.fb.group({
+    id: [''],
     userName: ['', Validators.required],
     pwd: ['', Validators.required],
     inUse: [false],
@@ -50,22 +51,37 @@ export class EditModalComponent implements OnInit {
 
   onConfirm() {
     console.log(this.accountForm);
-    this.accountForm.patchValue({
-      createTime: moment(new Date()).format('YYYY/MM/DD HH:mm:ss')
-    });
     this.commonSvc.validateAllFormFields(this.accountForm);
 
     if (this.accountForm.valid) {
-      this.accountSvc.addAccount(this.accountForm.value).subscribe((res: any) => {
-        console.log(res)
-        if (res.RetCode === RETCODE.SUCCESS) {
-          const modal = this.modalSvc.success({
-            nzTitle: res.RetMsg,
-          });
+      if (this.account?.id) {
+        this.accountSvc.updateAccount(this.accountForm.value).subscribe((res: any) => {
+          console.log(res)
+          if (res.RetCode === RETCODE.SUCCESS) {
+            const modal = this.modalSvc.success({
+              nzTitle: res.RetMsg,
+            });
 
-          this.modal.triggerOk();
-         }
-      });
+            this.modal.triggerOk();
+          }
+        });
+      } else {
+        this.accountForm.patchValue({
+          createTime: moment(new Date()).format('YYYY/MM/DD HH:mm:ss')
+        });
+
+        this.accountSvc.addAccount(this.accountForm.value).subscribe((res: any) => {
+          console.log(res)
+          if (res.RetCode === RETCODE.SUCCESS) {
+            const modal = this.modalSvc.success({
+              nzTitle: res.RetMsg,
+            });
+
+            this.modal.triggerOk();
+          }
+        });
+      }
+
     }
   }
 

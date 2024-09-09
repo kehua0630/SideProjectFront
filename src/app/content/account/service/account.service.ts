@@ -50,6 +50,20 @@ export class AccountService {
     );
   }
 
+  updateAccount(account: Account): Observable<any> {
+    const url = API.ACCOUNT + `/${account.id}`;
+    console.log('put account', account);
+    return this.apiSvc.requestUrl(HTTP_METHOD.PUT, account, environment.DEFAULT_IP, url).pipe(
+      map((res) => {
+        console.log(res);
+        if (RETCODE.SUCCESS !== res.RetCode) {
+          throw res.RetMsg;
+        }
+        return res;
+      })
+    );
+  }
+
   deleteAccount(accountId: string): Observable<any> {
     const url = API.ACCOUNT + `/${accountId}`;
     console.log('delete account', accountId)

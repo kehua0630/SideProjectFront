@@ -38,7 +38,7 @@ app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Headers",
         "DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization");
-    res.setHeader("Access-Control-Allow-Methods", "GET,POST,PATCH,DELETE")
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE")
 
     // continue
     next();
@@ -89,6 +89,27 @@ app.get("/accounts", (req, res, next) => {
                 RetResult: documents,
             });
         });
+});
+
+app.put("/accounts/:id", (req, res, next) => {
+    console.log('put req ID::', req.params.id);
+    const account = new Account({
+        _id: req.params.id,
+        userName: req.body.userName,
+        pwd: req.body.pwd,
+        inUse: req.body.inUse,
+        func: req.body.func,
+        createTime: req.body.createTime,
+    });
+
+    Account.updateOne({ _id: req.params.id }, account)
+        .then(result => {
+            console.log(result);
+            res.status(200).json({
+                RetCode: '00',
+                RetMsg: `更新成功！`,
+            });
+        })
 });
 
 app.delete("/accounts/:id", (req, res, next) => {

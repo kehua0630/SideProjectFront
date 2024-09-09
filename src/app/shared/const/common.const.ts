@@ -2,7 +2,8 @@
 export const enum HTTP_METHOD {
     GET = 'get',
     POST = 'post',
-    DELETE = 'delete'
+    DELETE = 'delete',
+    PUT = 'put'
 }
 
 

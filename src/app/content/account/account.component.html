@@ -53,9 +53,11 @@
                             <tr *ngFor="let data of columnTable.data">
                                 <td>{{ data.userName }}</td>
                                 <td>
-                                    <div *ngFor="let func of data.func; let i as index">{{ func.value | funcPipe }}{{' '}}
+                                    <div *ngFor="let func of data.func; let i as index">
+                                        <span *ngIf="func.checked">
+                                            {{ func.value | funcPipe }}{{' '}}
+                                        </span>
                                     </div>
-
                                 </td>
                                 <td>{{ data.inUse }}</td>
                                 <td>{{ data.createTime }}</td>

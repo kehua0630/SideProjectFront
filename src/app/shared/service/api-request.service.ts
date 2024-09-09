@@ -106,6 +106,10 @@ export class ApiRequestService {
       return this.http
         .delete<any>(ip + url, { headers: httpHeaders })
         .pipe(filter(this.handleUserError), catchError(this.handleError));
+    } else if (HTTP_METHOD.PUT === method) {
+      return this.http
+        .put<any>(ip + url, requestParams, { headers: httpHeaders })
+        .pipe(filter(this.handleUserError), catchError(this.handleError));
     }
     else {
       return this.http
