@@ -87,3 +87,7 @@ server.listen(port);
 
  // npm install --save body-parser
 
+
+ // npm install --save mongoose-unique-validator
+
+//  npm install --save bcrypt

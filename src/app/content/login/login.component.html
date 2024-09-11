@@ -1,3 +1,36 @@
-<h1 class="text-3xl font-bold underline">
-  Hello world!
-</h1>
+<div class="h-full w-full grid grid-cols-3 gap-4 content-center flex justify-center">
+  <div class="h-72 col-start-2 col-span-1 rounded-md border-black border-solid bg-slate-200 p-8">
+    <h6>Welcome!</h6>
+    <form nz-form [nzLayout]="'vertical'" [formGroup]="loginForm" class="ant-advanced-search-form" nzNoColon
+      (ngSubmit)="onLogin()">
+      <div nz-row [nzGutter]="{ md: 12, xl: 24 }" nzType="flex" nzAlign="bottom">
+        <div nz-col nzSpan="18">
+          <nz-form-item>
+            <nz-form-label nzFor="period">名稱</nz-form-label>
+            <nz-form-control nzErrorTip="此欄位為必填欄位">
+              <input nz-input formControlName="userName" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzSpan="18">
+          <nz-form-item>
+            <nz-form-label nzFor="period">密碼</nz-form-label>
+            <nz-form-control nzErrorTip="此欄位為必填欄位">
+              <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="請輸入密碼"
+                formControlName="pwd" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzSpan="24">
+          <nz-form-item>
+            <nz-form-control>
+              <button type="submit" nz-button nzType="primary" class="mx-2">
+                登入
+              </button>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

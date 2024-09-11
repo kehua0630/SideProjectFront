@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 
 const app = express();
 const accountRoutes = require('./routes/account');
+const loginRoutes = require('./routes/login');
 
 // basic use, show message send on localhost:3000
 // app.use((req, res, next) => {
@@ -45,6 +46,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/accounts',accountRoutes);
+app.use('/login', loginRoutes)
 
 // post request
 // app.post("/api/posts", (req, res, next) => {

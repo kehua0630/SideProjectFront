@@ -1,29 +1,40 @@
 const express = require('express');
 const accountRouter = express.Router();
+const bcrypt = require("bcrypt");
 
 const Account = require('../models/account')
 
 accountRouter.post('', (req, res, next) => {
     console.log('post accounts')
-    const account = new Account({
-        userName: req.body.userName,
-        pwd: req.body.pwd,
-        inUse: req.body.inUse,
-        func: req.body.func,
-        createTime: req.body.createTime,
-    });
-
-    console.log(account);
-    // save to db as accounts
-    account.save().then(newAccount => {
-
-        // 傳回新增的ID, 寫回前端, 不用重新摳api, get全部資料
-        res.status(201).json({
-            RetCode: '00',
-            RetMsg: '新增成功！',
-            RetResult: newAccount._id
+    bcrypt.hash(req.body.pwd, 10).then(hashPwd => {
+        const account = new Account({
+            userName: req.body.userName,
+            pwd: hashPwd,
+            inUse: req.body.inUse,
+            func: req.body.func,
+            createTime: req.body.createTime,
         });
+
+        console.log(account);
+        // save to db as accounts
+        account.save()
+            .then(newAccount => {
+                // 傳回新增的ID, 寫回前端, 不用重新摳api, get全部資料
+                res.status(201).json({
+                    RetCode: '00',
+                    RetMsg: '新增成功！',
+                    RetResult: newAccount._id
+                });
+            })
+            .catch(err => {
+                res.status(500).json({
+                    RetCode: '90',
+                    RetMsg: '名稱已使用！',
+                    RetResult: ''
+                })
+            });
     });
+
 })
 
 accountRouter.get("", (req, res, next) => {

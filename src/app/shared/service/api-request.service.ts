@@ -189,6 +189,7 @@ export class ApiRequestService {
       console.error(
         `Backend returned code ${error.status}, ` + `body was: ${JSON.stringify(error.error)}`
       );
+      alert(error.error.RetMsg);
     }
     if (error.status === 401) {
       this.msg.error(ALERT_MSG_TITLE.UNAUTHORIZED_401);

@@ -25,7 +25,7 @@ export class AuthGuard implements CanActivate {
    * @returns
    */
   checkLogin(url: string): boolean {
-    // if (sessionStorage.getItem('COMMON.TOKEN')) {
+    // if (sessionStorage.getItem('token')) {
     //   return true;
     // }
 
