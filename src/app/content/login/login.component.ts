@@ -28,5 +28,9 @@ export class LoginComponent {
 
   onLogin() {
     this.commonSvc.validateAllFormFields(this.loginForm);
+
+    if(this.loginForm.valid){
+      
+    }
    }
 }
