@@ -25,15 +25,16 @@ export class AuthGuard implements CanActivate {
    * @returns
    */
   checkLogin(url: string): boolean {
-    // if (sessionStorage.getItem('token')) {
-    //   return true;
-    // }
+    // return true;
 
-    // // Navigate to the login page with extras
-    // // this.accountService.logout();
-    // this.router.navigate([ROUTING_PATH.LOGIN]);
-    // return false;
-    return true;
+    if (sessionStorage.getItem('token')) {
+      return true;
+    }
+
+    // Navigate to the login page with extras
+    // this.accountService.logout();
+    this.router.navigate([ROUTING_PATH.LOGIN]);
+    return false;
   }
 
 }

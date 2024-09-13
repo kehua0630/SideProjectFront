@@ -26,47 +26,47 @@
 const app = require("./app");
 const debug = require("debug")("node-angular");
 const http = require("http");
-const { MongoClient } = require('mongodb');
+const { MongoClient } = require("mongodb");
 
-const normalizePort = val => {
-    var port = parseInt(val, 10);
+const normalizePort = (val) => {
+  var port = parseInt(val, 10);
 
-    if (isNaN(port)) {
-        // named pipe
-        return val;
-    }
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
 
-    if (port >= 0) {
-        // port number
-        return port;
-    }
+  if (port >= 0) {
+    // port number
+    return port;
+  }
 
-    return false;
+  return false;
 };
 
-const onError = error => {
-    if (error.syscall !== "listen") {
-        throw error;
-    }
-    const bind = typeof port === "string" ? "pipe " + port : "port " + port;
-    switch (error.code) {
-        case "EACCES":
-            console.error(bind + " requires elevated privileges");
-            process.exit(1);
-            break;
-        case "EADDRINUSE":
-            console.error(bind + " is already in use");
-            process.exit(1);
-            break;
-        default:
-            throw error;
-    }
+const onError = (error) => {
+  if (error.syscall !== "listen") {
+    throw error;
+  }
+  const bind = typeof port === "string" ? "pipe " + port : "port " + port;
+  switch (error.code) {
+    case "EACCES":
+      console.error(bind + " requires elevated privileges");
+      process.exit(1);
+      break;
+    case "EADDRINUSE":
+      console.error(bind + " is already in use");
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
 };
 
 const onListening = () => {
-    const addr = server.address();
-    const bind = typeof port === "string" ? "pipe " + port : "port " + port;
-    debug("Listening on " + bind);
+  const addr = server.address();
+  const bind = typeof port === "string" ? "pipe " + port : "port " + port;
+  debug("Listening on " + bind);
 };
 
 const port = normalizePort(process.env.PORT || "3000");
@@ -77,17 +77,20 @@ server.on("error", onError);
 server.on("listening", onListening);
 server.listen(port);
 
- // npm install --save express
- // add express to project
+// npm install --save express
+// add express to project
 
- // npm install --save-dev nodemon
- // add "start:server": "nodemon server.js" in package.json
- // npm run start:server
- // it will automatically restart server.js when code changes
+// npm install --save-dev nodemon
+// add "start:server": "nodemon server.js" in package.json
+// npm run start:server
+// it will automatically restart server.js when code changes
 
- // npm install --save body-parser
-
-
- // npm install --save mongoose-unique-validator
-
+// 取得req內容
+// npm install --save body-parser
+// DB唯一值確認
+// npm install --save mongoose-unique-validator
+// 密碼加密
 //  npm install --save bcrypt
+//  npm install --save bcryptjs
+// 產生token
+// npm install --save jsonwebtoken
