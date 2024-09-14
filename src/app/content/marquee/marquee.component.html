@@ -1,1 +1,15 @@
-<p>marquee works!</p>
+<!-- app.component.html -->
+
+<div></div>
+
+<div>
+	<div class="main-container mt-8">
+		<div class="editor-container editor-container_classic-editor" #editorContainerElement>
+			<div class="editor-container__editor p-8">
+				<div #editorElement>
+					<ckeditor [editor]="Editor" [config]="config" *ngIf="isLayoutReady" />
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

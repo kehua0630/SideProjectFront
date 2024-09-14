@@ -27,7 +27,6 @@ export class LoginComponent {
 
 
   ngOnInit(): void {
-    this.onLogin();
   }
 
   onLogin() {

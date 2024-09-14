@@ -10,6 +10,7 @@ import zh from '@angular/common/locales/zh';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 import { AntDesingModule } from './shared/module/ant-design.module';
 import { IndexPageComponent } from './content/index-page/index-page.component';
@@ -42,14 +43,16 @@ registerLocaleData(zh);
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    AntDesingModule
+    AntDesingModule,
+    CKEditorModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_TW }
   ],
   exports: [
     FunctionPipe,
-    BaseModalComponent
+    BaseModalComponent,
+    CKEditorModule
   ],
   bootstrap: [AppComponent]
 })
