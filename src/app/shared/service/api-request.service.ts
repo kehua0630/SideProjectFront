@@ -154,7 +154,7 @@ export class ApiRequestService {
   private getHTTPHeaders(): HttpHeaders {
     const result = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + localStorage.getItem(COMMON.TOKEN)
+      Authorization: 'Bearer ' + sessionStorage.getItem(COMMON.TOKEN)
     });
 
     return result;
@@ -164,7 +164,7 @@ export class ApiRequestService {
     let result = true;
     // console.log(response);
     if (-10 === response.code) {
-      if (localStorage.getItem(COMMON.TOKEN)) {
+      if (sessionStorage.getItem(COMMON.TOKEN)) {
         this.msg.error(response.message);
       }
       this.router.navigateByUrl('/login');
