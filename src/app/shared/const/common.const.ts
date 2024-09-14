@@ -28,7 +28,8 @@ export const enum COMMON {
    * prevent duplicate token key in same ccsp website,
    * This website will be embedded into ccsp website
    */
-  TOKEN2 = 'token2',
+  TOKEN = 'token',
+  FUNC = 'func',
 
 }
 

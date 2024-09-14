@@ -9,8 +9,8 @@ import { ROUTING_PATH } from './shared/const/router.const';
 import { AccountComponent } from './content/account/account.component';
 
 const routes: Routes = [
-  { path: '', component: IndexPageComponent },
-  { path: ROUTING_PATH.INDEX, component: IndexPageComponent },
+  { path: '', component: IndexPageComponent, canActivate: [AuthGuard] },
+  { path: ROUTING_PATH.INDEX, component: IndexPageComponent, canActivate: [AuthGuard] },
   { path: ROUTING_PATH.LOGIN, component: LoginComponent },
   { path: ROUTING_PATH.ACCOUNT, component: AccountComponent, canActivate: [AuthGuard] },
   { path: ROUTING_PATH.MARQUEE, component: MarqueeComponent, canActivate: [AuthGuard] },

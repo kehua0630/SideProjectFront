@@ -22,17 +22,7 @@ export class LoginServiceService {
         if (RETCODE.SUCCESS !== res.RetCode) {
           throw res.RetMsg;
         }
-        console.log(res)
-        return res.RetResult.map((account: any) => {
-          return {
-            id: account._id,
-            userName: account.userName,
-            pwd: account.pwd,
-            createTime: account.createTime,
-            inUse: account.inUse,
-            func: account.func
-          }
-        });
+        return res.RetResult;
       })
     );
   }

@@ -1,5 +1,14 @@
 <nz-layout>
-  <nz-header>Header</nz-header>
+  <nz-header class="bg-slate-50">
+    <ul nz-menu nzMode="horizontal">
+      <li nz-menu-item nzMatchRouter *ngFor="let func of adminSvc.getDisplatFunc()">
+        <a [routerLink]="[func.routerPath]">{{ func.name }}</a>
+      </li>
+      <li nz-menu-item nzMatchRouter *ngIf="showLogout()">
+        <a (click)="onlogout()">登出</a>
+      </li>
+    </ul>
+  </nz-header>
   <nz-content class="p-2">
     <router-outlet></router-outlet>
   </nz-content>

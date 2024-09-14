@@ -11,6 +11,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
     NzIconModule,
     NzSwitchModule,
     NzCheckboxModule,
-    NzSpinModule
+    NzSpinModule,
+    NzMenuModule
   ],
   providers: [
 
@@ -43,7 +45,8 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
     NzIconModule,
     NzSwitchModule,
     NzCheckboxModule,
-    NzSpinModule
+    NzSpinModule,
+    NzMenuModule
   ],
   bootstrap: []
 })

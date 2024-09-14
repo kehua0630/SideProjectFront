@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, ActivatedRoute } from '@angular/router';
 import { ROUTING_PATH } from '../shared/const/router.const';
+import { COMMON } from '../shared/const/common.const';
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +27,7 @@ export class AuthGuard implements CanActivate {
    */
   checkLogin(url: string): boolean {
     // return true;
-
-    if (sessionStorage.getItem('token')) {
+    if (sessionStorage.getItem(COMMON.TOKEN)) {
       return true;
     }
 

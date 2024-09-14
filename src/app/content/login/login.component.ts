@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from 'src/app/shared/service/common.service';
-import { LoginServiceService } from './service/login-service.service';
+import { Router } from '@angular/router';
+import { AdminService } from 'src/app/shared/service/admin.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private commonSvc: CommonService,
-    private loginSvc: LoginServiceService
+    private adminSvc: AdminService,
+    private router: Router
   ) { }
 
 
@@ -33,9 +35,9 @@ export class LoginComponent {
 
     if (this.loginForm.valid) {
       const loginInfo = this.loginForm.value;
-      this.loginSvc.login(loginInfo).subscribe(res => {
-        console.log(res)
-       });
+      this.adminSvc.login(loginInfo).subscribe(res => {
+        this.router.navigate(['']);
+      });
     }
   }
 }

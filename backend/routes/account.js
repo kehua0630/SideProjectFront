@@ -76,23 +76,26 @@ accountRouter.get("/:id", (req, res, next) => {
 
 accountRouter.put("/:id", (req, res, next) => {
     console.log('put req ID::', req.params.id);
-    const account = new Account({
-        _id: req.params.id,
-        userName: req.body.userName,
-        pwd: req.body.pwd,
-        inUse: req.body.inUse,
-        func: req.body.func,
-        createTime: req.body.createTime,
+    bcrypt.hash(req.body.pwd, 10).then(hashPwd => {
+        const account = new Account({
+            _id: req.params.id,
+            userName: req.body.userName,
+            pwd: hashPwd,
+            inUse: req.body.inUse,
+            func: req.body.func,
+            createTime: req.body.createTime,
+        });
+
+        Account.updateOne({ _id: req.params.id }, account)
+            .then(result => {
+                console.log(result);
+                res.status(200).json({
+                    RetCode: '00',
+                    RetMsg: `更新成功！`,
+                });
+            })
     });
 
-    Account.updateOne({ _id: req.params.id }, account)
-        .then(result => {
-            console.log(result);
-            res.status(200).json({
-                RetCode: '00',
-                RetMsg: `更新成功！`,
-            });
-        })
 });
 
 accountRouter.delete("/:id", (req, res, next) => {

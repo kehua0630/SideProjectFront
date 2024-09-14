@@ -1,6 +1,6 @@
 <div class="h-full bg-slate-50 flex justify-center content-center ">
   <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-24 h-1/3 w-full md:w-2/4">
-    <div *ngFor="let func of functionList" class="flex justify-center content-center">
+    <div *ngFor="let func of adminSvc.getDisplatFunc()" class="flex justify-center content-center">
       <div class="cursor-pointer" (click)="onNavigateClick(func.routerPath)">
         <div>
           <img [src]="func.imageUrl" [alt]="func.name" class="h-48 mt-10 hover:scale-125">
