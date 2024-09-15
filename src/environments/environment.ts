@@ -6,7 +6,7 @@
 export const environment = {
   production: false,
   // DEFAULT_IP: 'http://localhost:3000',
-  DEFAULT_IP: 'https://angular-nodes-b669b3c24d93.herokuapp.com/',
+  DEFAULT_IP: 'https://angular-nodes-b669b3c24d93.herokuapp.com',
 };
 
 /*
