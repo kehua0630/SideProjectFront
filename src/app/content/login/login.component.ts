@@ -12,8 +12,8 @@ import { AdminService } from 'src/app/shared/service/admin.service';
 export class LoginComponent {
 
   loginForm: FormGroup = this.fb.group({
-    userName: ['', Validators.required],
-    pwd: ['', Validators.required]
+    userName: ['admin', Validators.required],
+    pwd: ['admin', Validators.required]
   });
 
   passwordVisible = false;
