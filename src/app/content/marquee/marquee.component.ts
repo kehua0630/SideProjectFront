@@ -36,7 +36,7 @@ export class MarqueeComponent {
   public Editor = ClassicEditor;
   public config: EditorConfig = {}; // CKEditor needs the DOM tree before 
 
-  trustedMarqueeText?: SafeHtml;
+  trustedMarqueeText?: SafeHtml = '';
   marqueeHtmlSpace = '&nbsp; ';
   marqueeHtmlSpaceNumber = 8;
 
@@ -53,7 +53,8 @@ export class MarqueeComponent {
   settingForm: FormGroup = this.fb.group({
     renewTime: '5',
     direction: 'LeftToRight',
-    speed: '3'
+    speed: '3',
+    content: ''
   });
 
   constructor(
@@ -63,7 +64,7 @@ export class MarqueeComponent {
 
 
   ngOnInit(): void {
-
+    this.getMarquee();
   }
 
   public ngAfterViewInit(): void {
@@ -144,76 +145,75 @@ export class MarqueeComponent {
     //   }
     //   this.marqueeParameter.RenewTime =
     //     data.RetResult.MarqueeSetup.RenewTime;
-    //   const serverDirection = data.RetResult.MarqueeSetup.Direction;
-    //   switch (serverDirection) {
-    //     case 'LeftToRight': {
-    //       this.marqueeHtmlElementParameter.htmlDirection = 'right';
-    //       break;
-    //     }
-    //     case 'RightToLeft': {
-    //       this.marqueeHtmlElementParameter.htmlDirection = 'left';
-    //       break;
-    //     }
-    //     case 'TopToBottom': {
-    //       this.marqueeHtmlElementParameter.htmlDirection = 'down';
-    //       break;
-    //     }
-    //     case 'BottomToTop': {
-    //       this.marqueeHtmlElementParameter.htmlDirection = 'up';
-    //       break;
-    //     }
-    //     default: {
-    //       throw new Error(
-    //         `serverDirection:${serverDirection} not implemented.`
-    //       );
-    //     }
-    //   }
+    const serverDirection = this.settingForm.get("direction")?.value;
+    switch (serverDirection) {
+      case 'LeftToRight': {
+        this.marqueeHtmlElementParameter.htmlDirection = 'right';
+        break;
+      }
+      case 'RightToLeft': {
+        this.marqueeHtmlElementParameter.htmlDirection = 'left';
+        break;
+      }
+      case 'TopToBottom': {
+        this.marqueeHtmlElementParameter.htmlDirection = 'down';
+        break;
+      }
+      case 'BottomToTop': {
+        this.marqueeHtmlElementParameter.htmlDirection = 'up';
+        break;
+      }
+      default: {
+        throw new Error(
+          `serverDirection:${serverDirection} not implemented.`
+        );
+      }
+    }
 
-    //   this.marqueeHtmlElementParameter.htmlScrollamount =
-    //     data.RetResult.MarqueeSetup.Speed;
+    this.marqueeHtmlElementParameter.htmlScrollamount =
+      this.settingForm.get("speed")?.value;
+    this.marquees = [this.settingForm.get("content")?.value];
 
-    //   this.marquees = data.RetResult.Marquees;
-
-    //   const text = this.getMarqueeText(this.marquees);
-
-    //   this.marqueeText = text.replace(/<p[^>]*>/g, '').replace(/<\/p>/g, '');
+    const text = this.getMarqueeText(this.marquees);
+    this.marqueeText = text.replace(/<p[^>]*>/g, '').replace(/<\/p>/g, '');
+    console.log('marqueeText',this.marqueeText)
     //   // console.log(this.marqueeText);
 
-    //   let marqueeHtml = '';
-    //   const marqueOpenTag =
-    //     '<marquee id="marquee" class="GeneratedMarquee" ' +
-    //     // 'direction="left" scrollamount="8" behavior="scroll">';
-    //     'direction="' +
-    //     this.marqueeHtmlElementParameter.htmlDirection +
-    //     '" scrollamount="' +
-    //     this.marqueeHtmlElementParameter.htmlScrollamount +
-    //     '" behavior="scroll">';
+      let marqueeHtml = '';
+      const marqueOpenTag =
+        '<marquee id="marquee" class="GeneratedMarquee" ' +
+        // 'direction="left" scrollamount="8" behavior="scroll">';
+        'direction="' +
+        this.marqueeHtmlElementParameter.htmlDirection +
+        '" scrollamount="' +
+        this.marqueeHtmlElementParameter.htmlScrollamount +
+        '" behavior="scroll">';
 
-    //   marqueeHtml = marqueOpenTag;
-    //   marqueeHtml = marqueeHtml.concat(this.marqueeText, '');
-    //   const marqueCloseTag = '</marquee>';
-    //   marqueeHtml = marqueeHtml.concat(marqueCloseTag, '');
+      marqueeHtml = marqueOpenTag;
+      marqueeHtml = marqueeHtml.concat(this.marqueeText, '');
+      const marqueCloseTag = '</marquee>';
+      marqueeHtml = marqueeHtml.concat(marqueCloseTag, '');
 
-    //   // // TODO if angular sanitize innerHtml but want keep html style use this and check XSS issue
-    //   this.trustedMarqueeText = this.sanitizer.bypassSecurityTrustHtml(
-    //     marqueeHtml
-    //   );
-    //   // console.log(this.trustedMarqueeText);
+      // // TODO if angular sanitize innerHtml but want keep html style use this and check XSS issue
+      this.trustedMarqueeText = this.sanitizer.bypassSecurityTrustHtml(
+        marqueeHtml
+      );
+      // console.log(this.trustedMarqueeText);
 
-    //   this.isQueryingMarquee = false;
-    //   console.log('marquee renew end');
+      this.isQueryingMarquee = false;
+      console.log('marquee renew end');
 
-    //   // job for next time to renew marquee
-    //   this.jobToRefreshMarquee(
-    //     parseInt(this.marqueeParameter.RenewTime || '3', 10)
-    //   );
+      // job for next time to renew marquee
+      // this.jobToRefreshMarquee(
+      //   parseInt(this.marqueeParameter.RenewTime || '3', 10)
+      // );
     // });
   }
 
   getMarqueeText(marquees: any[]): string {
     let text = '';
     for (const marquee of marquees) {
-      text += marquee.Content;
+      text += marquee;
       text += this.marqueeHtmlSpace.repeat(this.marqueeHtmlSpaceNumber);
     }
     // Remove the start <p> or <p attr="">
@@ -223,13 +223,13 @@ export class MarqueeComponent {
     return text;
   }
 
-  jobToRefreshMarquee(marqueeRenewTime: number): void {
-    const renewMilliseconds = marqueeRenewTime * 60 * 1000;
+  // jobToRefreshMarquee(marqueeRenewTime: number): void {
+  //   const renewMilliseconds = marqueeRenewTime * 60 * 1000;
 
-    setTimeout(() => {
-      this.getMarquee();
-    }, renewMilliseconds);
-  }
+  //   setTimeout(() => {
+  //     this.getMarquee();
+  //   }, renewMilliseconds);
+  // }
 }
 
 
