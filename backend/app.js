@@ -4,6 +4,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const path = require('path');
 
 const app = express();
 const accountRoutes = require('./routes/account');
@@ -33,6 +34,7 @@ mongoose.connect('mongodb+srv://chaokehuawork:GPsf75MpfVeNpufb@cluster0.mlowz.mo
 
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: false }));
+app.use('/', express.static(path.join(__dirname, 'angular')));
 
 app.use((req, res, next) => {
     // allow CORS
@@ -45,8 +47,12 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/accounts',accountRoutes);
-app.use('/login', loginRoutes)
+app.use('/accounts', accountRoutes);
+app.use('/login', loginRoutes);
+
+app.use((req, res, next) => {
+    res.sendFile(path.join(__dirname, "angular", "index.html"));
+});
 
 // post request
 // app.post("/api/posts", (req, res, next) => {
