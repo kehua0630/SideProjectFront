@@ -14,6 +14,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     NzSpinModule,
     NzMenuModule,
     NzInputNumberModule,
-    NzSelectModule
+    NzSelectModule,
+    NzMessageModule
   ],
   providers: [
 
@@ -52,7 +54,8 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     NzSpinModule,
     NzMenuModule,
     NzInputNumberModule,
-    NzSelectModule
+    NzSelectModule,
+    NzMessageModule
   ],
   bootstrap: []
 })

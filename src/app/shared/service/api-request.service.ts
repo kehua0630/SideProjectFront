@@ -192,6 +192,7 @@ export class ApiRequestService {
       alert(error.error.RetMsg);
     }
     if (error.status === 401) {
+      this.router.navigateByUrl('/login');
       this.msg.error(ALERT_MSG_TITLE.UNAUTHORIZED_401);
     } else
       if (

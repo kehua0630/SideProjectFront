@@ -3,9 +3,10 @@ const accountRouter = express.Router();
 // const bcrypt = require("bcrypt");
 const bcrypt = require("bcryptjs");
 
+const checkAuth = require("../middleware/check-auth");
 const Account = require('../models/account')
 
-accountRouter.post('', (req, res, next) => {
+accountRouter.post('', checkAuth, (req, res, next) => {
     console.log('post accounts')
     bcrypt.hash(req.body.pwd, 10).then(hashPwd => {
         const account = new Account({
@@ -38,7 +39,7 @@ accountRouter.post('', (req, res, next) => {
 
 })
 
-accountRouter.get("", (req, res, next) => {
+accountRouter.get("", checkAuth, (req, res, next) => {
     console.log('get accounts');
     // TODO add fiter data
     Account.find()
@@ -52,7 +53,7 @@ accountRouter.get("", (req, res, next) => {
         });
 });
 
-accountRouter.get("/:id", (req, res, next) => {
+accountRouter.get("/:id", checkAuth, (req, res, next) => {
     console.log('put req ID::', req.params.id);
     Account.findById(req.params.id)
         .then(account => {
@@ -74,7 +75,7 @@ accountRouter.get("/:id", (req, res, next) => {
         })
 });
 
-accountRouter.put("/:id", (req, res, next) => {
+accountRouter.put("/:id", checkAuth, (req, res, next) => {
     console.log('put req ID::', req.params.id);
     bcrypt.hash(req.body.pwd, 10).then(hashPwd => {
         const account = new Account({

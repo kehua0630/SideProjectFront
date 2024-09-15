@@ -44,13 +44,6 @@ export class MarqueeComponent {
   marqueeText?: string;
   marquees?: any[];
 
-  /** server marqueeParameter */
-  marqueeParameter = {
-    RenewTime: '5',
-    Direction: 'LeftToRight',
-    Speed: '3',
-  };
-
   /** parse server marqueeParameter to parameter for html <marquee> tag */
   marqueeHtmlElementParameter = {
     htmlDirection: 'left',
