@@ -1,6 +1,6 @@
 <nz-layout>
-  <nz-header class="bg-cyan-200">
-    <ul nz-menu nzMode="horizontal" class="bg-cyan-200 border-none text-lg" style="height:8vh">
+  <nz-header class="bg-slate-300">
+    <ul nz-menu nzMode="horizontal" class="bg-slate-300 border-none text-lg" style="height:8vh" *ngIf="showLogout()">
       <li nz-menu-item nzMatchRouter *ngFor="let func of adminSvc.getDisplatFunc()">
         <a [routerLink]="[func.routerPath]">{{ func.name }}</a>
       </li>
