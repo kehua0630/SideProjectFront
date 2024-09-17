@@ -46,6 +46,7 @@ export class EditModalComponent implements OnInit {
     console.log(this.account)
     if (this.account) {
       this.accountForm?.patchValue(this.account);
+      this.accountForm.patchValue({ pwd: '' });
     }
   }
 
