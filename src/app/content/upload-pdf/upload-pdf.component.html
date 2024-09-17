@@ -1,1 +1,10 @@
-<p>coming soon</p>
+<nz-upload nzType="drag" [nzMultiple]="false" [nzAccept]="'.pdf'" (nzChange)="handleChange($event)"
+    [nzFileType]="'application/pdf'" [nzFileList]="uploadList">
+    <p class="ant-upload-drag-icon">
+        <span nz-icon nzType="inbox"></span>
+    </p>
+    <p class="ant-upload-text">點擊或拖曳上傳PDF</p>
+    <!-- <p class="ant-upload-hint">
+        Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files
+    </p> -->
+</nz-upload>

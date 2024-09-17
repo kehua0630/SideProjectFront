@@ -43,7 +43,7 @@ export class AdminService {
     login(loginInfo: { userName: string, pwd: string }): Observable<{ jwt: string, user: Account }> {
         const url = API.LOGIN;
 
-        return this.apiSvc.request(HTTP_METHOD.POST, loginInfo, url).pipe(
+        return this.apiSvc.requestUrl(HTTP_METHOD.POST, loginInfo, url).pipe(
             map((res) => {
                 if (RETCODE.SUCCESS !== res.RetCode) {
                     throw res.RetMsg;

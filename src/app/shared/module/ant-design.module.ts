@@ -15,6 +15,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
     NzMenuModule,
     NzInputNumberModule,
     NzSelectModule,
-    NzMessageModule
+    NzMessageModule,
+    NzUploadModule
   ],
   providers: [
 
@@ -55,7 +57,8 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
     NzMenuModule,
     NzInputNumberModule,
     NzSelectModule,
-    NzMessageModule
+    NzMessageModule,
+    NzUploadModule
   ],
   bootstrap: []
 })

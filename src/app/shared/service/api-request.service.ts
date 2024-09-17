@@ -7,7 +7,7 @@ import {
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { iif, Observable, throwError } from 'rxjs';
+import { from, Observable, throwError } from 'rxjs';
 import { catchError, filter, tap } from 'rxjs/operators';
 import {
   ALERT_MSG_TITLE,
@@ -27,45 +27,6 @@ export class ApiRequestService {
     private router: Router,
     private msg: NzMessageService
   ) { }
-  /**
-   * @param method POST or GET
-   * @param requestParams object
-   * @param url gateway url
-   * @param msgCallback Set this argument to override default behavior of popup msg.
-   */
-  request(method: HTTP_METHOD.POST | HTTP_METHOD.GET | string, requestParams: any, url: string, msgCallback?: (res: any) => void): Observable<any> {
-    const httpHeaders = this.getHTTPHeaders();
-
-    return iif(
-      () => HTTP_METHOD.POST === method,
-      this.http.post<any>(environment.DEFAULT_IP + url, requestParams, {
-        headers: httpHeaders
-      }),
-      this.http.get<any>(environment.DEFAULT_IP + url, { headers: httpHeaders })
-    ).pipe(
-      filter(this.handleUserError),
-      catchError(this.handleError),
-      tap(
-        msgCallback ||
-        ((res: IResponse<unknown>) => {
-          if (res?.RetCode === RETCODE.FAIL) {
-            this.msg.error(res.RetMsg, { nzDuration: 6000 });
-          } else if (res?.RetCode === RETCODE.SUCCESS) {
-            if (/查詢作業成功/.test(res.RetMsg)) {
-            } else if (/作業成功/.test(res.RetMsg)) {
-              this.msg.success(res.RetMsg);
-            } else if (/儲存成功/.test(res.RetMsg)) {
-              this.msg.info(res.RetMsg.split('\r\n').join('<br>'), { nzDuration: 10000 });
-            } else if (/作業/.test(res.RetMsg)) {
-              this.msg.info(res.RetMsg);
-            } else if (/結案完成/.test(res.RetMsg)) {
-              this.msg.info(res.RetMsg);
-            }
-          }
-        })
-      )
-    );
-  }
 
   /** 拿下拉選單的image */
   requestFile(url: string): Observable<Blob> {
@@ -94,28 +55,50 @@ export class ApiRequestService {
   requestUrl(
     method: string,
     requestParams: any,
-    ip: string,
     url: string
   ): Observable<any> {
     const httpHeaders = this.getHTTPHeaders();
     if (HTTP_METHOD.POST === method) {
       return this.http
-        .post<any>(ip + url, requestParams, { headers: httpHeaders })
+        .post<any>(environment.DEFAULT_IP + url, requestParams, { headers: httpHeaders })
         .pipe(filter(this.handleUserError), catchError(this.handleError));
     } else if (HTTP_METHOD.DELETE === method) {
       return this.http
-        .delete<any>(ip + url, { headers: httpHeaders })
+        .delete<any>(environment.DEFAULT_IP + url, { headers: httpHeaders })
         .pipe(filter(this.handleUserError), catchError(this.handleError));
     } else if (HTTP_METHOD.PUT === method) {
       return this.http
-        .put<any>(ip + url, requestParams, { headers: httpHeaders })
+        .put<any>(environment.DEFAULT_IP + url, requestParams, { headers: httpHeaders })
         .pipe(filter(this.handleUserError), catchError(this.handleError));
     }
     else {
       return this.http
-        .get<any>(ip + url, { headers: httpHeaders })
+        .get<any>(environment.DEFAULT_IP + url, { headers: httpHeaders })
         .pipe(filter(this.handleUserError), catchError(this.handleError));
     }
+  }
+
+  uploadFile(file: File, url: string): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    // Convert the fetch Promise to an Observable
+    const fetchObservable = from(
+      fetch(`${environment.DEFAULT_IP}${url}`, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Authorization: 'Bearer ' + sessionStorage.getItem(COMMON.TOKEN)
+        },
+      })
+        .then((res) => res.json())
+        .catch((err) => {
+          console.error('Error occurred:', err);
+          throw err;
+        })
+    );
+
+    return fetchObservable;
   }
 
   requestNoToken(

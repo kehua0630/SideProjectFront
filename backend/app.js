@@ -9,6 +9,7 @@ const path = require('path');
 const app = express();
 const accountRoutes = require('./routes/account');
 const loginRoutes = require('./routes/login');
+const uploadRoutes = require('./routes/upload');
 
 // basic use, show message send on localhost:3000
 // app.use((req, res, next) => {
@@ -32,7 +33,10 @@ mongoose.connect('mongodb+srv://chaokehuawork:GPsf75MpfVeNpufb@cluster0.mlowz.mo
         console.log('mongodb failed!')
     })
 
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
+// 加大for 上傳檔案
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', express.static(path.join(__dirname, 'angular')));
 
@@ -49,6 +53,7 @@ app.use((req, res, next) => {
 
 app.use('/accounts', accountRoutes);
 app.use('/login', loginRoutes);
+app.use('/upload', uploadRoutes);
 
 app.use((req, res, next) => {
     res.sendFile(path.join(__dirname, "angular", "index.html"));

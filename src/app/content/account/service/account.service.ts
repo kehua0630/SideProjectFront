@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { HTTP_METHOD, API, RETCODE } from 'src/app/shared/const/common.const';
 import { ApiRequestService } from 'src/app/shared/service/api-request.service';
 import { map } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +16,7 @@ export class AccountService {
   getAccountList(): Observable<Account[]> {
     const url = API.ACCOUNT;
 
-    return this.apiSvc.request(HTTP_METHOD.GET, null, url).pipe(
+    return this.apiSvc.requestUrl(HTTP_METHOD.GET, null, url).pipe(
       map((res) => {
         if (RETCODE.SUCCESS !== res.RetCode) {
           throw res.RetMsg;
@@ -39,7 +38,7 @@ export class AccountService {
   addAccount(account: Account): Observable<any> {
     const url = API.ACCOUNT;
     console.log('post account', account)
-    return this.apiSvc.request(HTTP_METHOD.POST, account, url).pipe(
+    return this.apiSvc.requestUrl(HTTP_METHOD.POST, account, url).pipe(
       map((res) => {
         console.log(res);
         if (RETCODE.SUCCESS !== res.RetCode) {
@@ -53,7 +52,7 @@ export class AccountService {
   updateAccount(account: Account): Observable<any> {
     const url = API.ACCOUNT + `/${account.id}`;
     console.log('put account', account);
-    return this.apiSvc.requestUrl(HTTP_METHOD.PUT, account, environment.DEFAULT_IP, url).pipe(
+    return this.apiSvc.requestUrl(HTTP_METHOD.PUT, account, url).pipe(
       map((res) => {
         console.log(res);
         if (RETCODE.SUCCESS !== res.RetCode) {
@@ -67,7 +66,7 @@ export class AccountService {
   deleteAccount(accountId: string): Observable<any> {
     const url = API.ACCOUNT + `/${accountId}`;
     console.log('delete account', accountId)
-    return this.apiSvc.requestUrl(HTTP_METHOD.DELETE, null, environment.DEFAULT_IP, url).pipe(
+    return this.apiSvc.requestUrl(HTTP_METHOD.DELETE, null, url).pipe(
       map((res) => {
         if (RETCODE.SUCCESS !== res.RetCode) {
           throw res.RetMsg;

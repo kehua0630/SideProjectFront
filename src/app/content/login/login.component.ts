@@ -9,7 +9,7 @@ import { AdminService } from 'src/app/shared/service/admin.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
 
   loginForm: FormGroup = this.fb.group({
     userName: ['admin', Validators.required],

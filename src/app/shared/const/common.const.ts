@@ -35,7 +35,8 @@ export const enum COMMON {
 
 export const enum API {
   ACCOUNT = '/accounts',
-  LOGIN = '/login'
+  LOGIN = '/login',
+  UPLOAD = '/upload'
 }
 
 export const enum RET_RESPONSE {
